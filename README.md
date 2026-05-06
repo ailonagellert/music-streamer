@@ -13,6 +13,9 @@ PoopTunes is built with a **Premium Dark & Brown** aesthetic—warm, cozy, and s
 - **Backend**: Node.js + Express + SQLite
 - **Infrastructure**: Docker Compose (One command to rule them all)
 
+### 📸 UI Preview
+![PoopTunes Interface](./image.png)
+
 ## 🛠️ The Vibe Coder's Toolkit
 
 To start vibe coding with PoopTunes, you'll need a few essentials:
