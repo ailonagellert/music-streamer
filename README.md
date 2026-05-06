@@ -4,7 +4,7 @@
 
 Welcome to **PoopTunes**, a self-hosted music streamer designed specifically for the **Vibe Coding** era. This repo isn't just code; it's a canvas for you and your AI agent to build the ultimate personal audio sanctuary.
 
-![PoopTunes Mockup](https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&q=80&w=1200)
+![PoopTunes Mockup](./hero.png)
 
 ## 🎨 The Vibe
 PoopTunes is built with a **Premium Dark & Brown** aesthetic—warm, cozy, and slightly irreverent. It’s designed to look like a high-end chocolate shop that happens to play lo-fi beats.
@@ -69,3 +69,4 @@ If you've vibe-coded something cool, open a PR! We love new animations, better a
 
 ---
 *Made with 💩 and ❤️ by the Vibe Coding Community.*
+*(A fun AI coding lesson built with some funny teen boys!)*
