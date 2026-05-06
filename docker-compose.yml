@@ -1,0 +1,77 @@
+###############################################################################
+#  PoopTunes — docker-compose.yml
+#  Copy .env.example → .env, fill in your values, then:
+#    docker compose up -d --build
+###############################################################################
+
+version: '3.9'
+
+# ── Named volumes ─────────────────────────────────────────────────────────────
+volumes:
+  music_data:
+    driver: local
+  db_data:
+    driver: local
+
+# ── Network ───────────────────────────────────────────────────────────────────
+networks:
+  pooptunes:
+    driver: bridge
+
+services:
+
+  # ── API / Backend ────────────────────────────────────────────────────────────
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: pooptunes-server:latest
+    container_name: pooptunes-api
+    restart: unless-stopped
+    networks:
+      - pooptunes
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - UPLOAD_LIMIT_MB=${UPLOAD_LIMIT_MB:-200}
+    volumes:
+      # Persist MP3 files and SQLite DB on the host
+      - music_data:/app/storage/music
+      - db_data:/app/storage
+    expose:
+      - "3001"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3001/api/library"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ── Frontend (nginx) ─────────────────────────────────────────────────────────
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        # Baked into the React bundle at build time — keep as /api for same-origin
+        VITE_API_BASE_URL: /api
+    image: pooptunes-client:latest
+    container_name: pooptunes-ui
+    restart: unless-stopped
+    networks:
+      - pooptunes
+    ports:
+      - "${HOST_PORT:-3005}:80"
+    depends_on:
+      server:
+        condition: service_healthy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
