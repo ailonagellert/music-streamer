@@ -3,17 +3,17 @@ import api from '../services/api';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-const fmtSize  = (b) => b < 1024*1024 ? `${(b/1024).toFixed(0)} KB` : `${(b/1024/1024).toFixed(1)} MB`;
-const fmtName  = (n) => n.length > 36 ? n.slice(0, 33) + '…' : n;
+const fmtSize = (b) => b < 1024 * 1024 ? `${(b / 1024).toFixed(0)} KB` : `${(b / 1024 / 1024).toFixed(1)} MB`;
+const fmtName = (n) => n.length > 36 ? n.slice(0, 33) + '…' : n;
 
 const STATUS = { QUEUED: 'queued', UPLOADING: 'uploading', DONE: 'done', ERROR: 'error' };
 
 // ─── UploadModal ─────────────────────────────────────────────────────────────
 
 const UploadModal = ({ isOpen, onClose, onUploaded }) => {
-  const [files, setFiles]   = useState([]); // [{ id, file, status, progress, result, error }]
+  const [files, setFiles] = useState([]); // [{ id, file, status, progress, result, error }]
   const [dragging, setDrag] = useState(false);
-  const inputRef            = useRef(null);
+  const inputRef = useRef(null);
 
   if (!isOpen) return null;
 
@@ -32,9 +32,9 @@ const UploadModal = ({ isOpen, onClose, onUploaded }) => {
   };
 
   // ── Drag events ─────────────────────────────────────────────────────────────
-  const onDragOver  = (e) => { e.preventDefault(); setDrag(true); };
-  const onDragLeave = ()  => setDrag(false);
-  const onDrop      = (e) => { e.preventDefault(); setDrag(false); addFiles(e.dataTransfer.files); };
+  const onDragOver = (e) => { e.preventDefault(); setDrag(true); };
+  const onDragLeave = () => setDrag(false);
+  const onDrop = (e) => { e.preventDefault(); setDrag(false); addFiles(e.dataTransfer.files); };
 
   // ── Upload one file ─────────────────────────────────────────────────────────
   const uploadOne = (item) => new Promise((resolve) => {
@@ -84,13 +84,13 @@ const UploadModal = ({ isOpen, onClose, onUploaded }) => {
   };
 
   const removeFile = (id) => setFiles(prev => prev.filter(f => f.id !== id));
-  const clearDone  = ()   => setFiles(prev => prev.filter(f => f.status !== STATUS.DONE));
-  const retryErrors = ()  => setFiles(prev => prev.map(f => f.status === STATUS.ERROR ? { ...f, status: STATUS.QUEUED, progress: 0, error: null } : f));
+  const clearDone = () => setFiles(prev => prev.filter(f => f.status !== STATUS.DONE));
+  const retryErrors = () => setFiles(prev => prev.map(f => f.status === STATUS.ERROR ? { ...f, status: STATUS.QUEUED, progress: 0, error: null } : f));
 
-  const queued    = files.filter(f => f.status === STATUS.QUEUED).length;
+  const queued = files.filter(f => f.status === STATUS.QUEUED).length;
   const uploading = files.filter(f => f.status === STATUS.UPLOADING).length;
-  const done      = files.filter(f => f.status === STATUS.DONE).length;
-  const errors    = files.filter(f => f.status === STATUS.ERROR).length;
+  const done = files.filter(f => f.status === STATUS.DONE).length;
+  const errors = files.filter(f => f.status === STATUS.ERROR).length;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -131,12 +131,12 @@ const UploadModal = ({ isOpen, onClose, onUploaded }) => {
           <>
             {/* Stats bar */}
             <div className="upload-stats">
-              {queued > 0    && <span className="stat stat-queued">{queued} queued</span>}
+              {queued > 0 && <span className="stat stat-queued">{queued} queued</span>}
               {uploading > 0 && <span className="stat stat-up">{uploading} uploading</span>}
-              {done > 0      && <span className="stat stat-done">{done} done</span>}
-              {errors > 0    && <span className="stat stat-err">{errors} failed</span>}
+              {done > 0 && <span className="stat stat-done">{done} done</span>}
+              {errors > 0 && <span className="stat stat-err">{errors} failed</span>}
               <div style={{ flex: 1 }} />
-              {done > 0   && <button className="btn-clear" onClick={clearDone}>Clear done</button>}
+              {done > 0 && <button className="btn-clear" onClick={clearDone}>Clear done</button>}
               {errors > 0 && <button className="btn-retry" onClick={retryErrors}>Retry failed</button>}
             </div>
 
@@ -145,10 +145,10 @@ const UploadModal = ({ isOpen, onClose, onUploaded }) => {
               {files.map(item => (
                 <div key={item.id} className={`file-row file-row-${item.status}`}>
                   <span className="file-status-icon">
-                    {item.status === STATUS.QUEUED    && '⏳'}
+                    {item.status === STATUS.QUEUED && '⏳'}
                     {item.status === STATUS.UPLOADING && '⬆️'}
-                    {item.status === STATUS.DONE      && '✅'}
-                    {item.status === STATUS.ERROR     && '❌'}
+                    {item.status === STATUS.DONE && '✅'}
+                    {item.status === STATUS.ERROR && '❌'}
                   </span>
 
                   <div className="file-info">

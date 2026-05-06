@@ -9,20 +9,20 @@ import api from './services/api';
 import { handleOAuthCallback, saveTokens } from './hooks/useOAuth';
 
 function App() {
-  const [tracks, setTracks]             = useState([]);
-  const [loading, setLoading]           = useState(true);
+  const [tracks, setTracks] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentTrack, setCurrentTrack] = useState(null);
   const [showServices, setShowServices] = useState(false);
-  const [showUpload, setShowUpload]     = useState(false);
-  const [oauthStatus, setOauthStatus]   = useState(null); // null | 'success' | 'error'
-  const [oauthMsg, setOauthMsg]         = useState('');
+  const [showUpload, setShowUpload] = useState(false);
+  const [oauthStatus, setOauthStatus] = useState(null); // null | 'success' | 'error'
+  const [oauthMsg, setOauthMsg] = useState('');
 
   // ── Handle OAuth callback redirect ──────────────────────────────────────────
   useEffect(() => {
-    const params  = new URLSearchParams(window.location.search);
-    const code    = params.get('code');
-    const state   = params.get('state');
-    const svcId   = localStorage.getItem('pt_last_oauth_svc');
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    const state = params.get('state');
+    const svcId = localStorage.getItem('pt_last_oauth_svc');
 
     if (code && svcId) {
       handleOAuthCallback(code, state, svcId)
@@ -60,7 +60,7 @@ function App() {
     }
   };
 
-  const isEmpty     = !loading && tracks.length === 0;
+  const isEmpty = !loading && tracks.length === 0;
   const showAmbient = isEmpty && !currentTrack;
 
   const handleDeleteTrack = async (id) => {
@@ -122,9 +122,9 @@ function App() {
             <p>Loading library…</p>
           </div>
         ) : (
-          <LibraryGrid 
-            tracks={tracks} 
-            onPlayTrack={(track) => setCurrentTrack(track)} 
+          <LibraryGrid
+            tracks={tracks}
+            onPlayTrack={(track) => setCurrentTrack(track)}
             onDeleteTrack={handleDeleteTrack}
           />
         )}

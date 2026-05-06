@@ -24,15 +24,22 @@ To start vibe coding with PoopTunes, you'll need a few essentials:
 
 ## 🚀 Quick Start (Vibe in 60 Seconds)
 
-1. **Clone & Setup**:
+1. **Clone the Repo**:
+   ```bash
+   git clone https://github.com/yourusername/pooptunes.git
+   cd pooptunes
+   ```
+2. **Environment Setup**:
+   Copy the example environment file to create your own configuration:
    ```bash
    cp .env.example .env
    ```
-2. **Launch**:
+   *(On Windows, you can just copy and paste the file and rename it to `.env`)*
+3. **Launch**:
    ```bash
    docker compose up -d --build
    ```
-3. **Enjoy**: Open `http://localhost:3005` (or whatever port you set in `.env`).
+4. **Enjoy**: Open `http://localhost:3005` (or whatever port you set in `.env`).
 
 ## 🛠️ Built for Vibe Coding
 This repository is optimized for **AI-First Development**. We keep the styles in `index.css` and the logic clean so you can say things like:

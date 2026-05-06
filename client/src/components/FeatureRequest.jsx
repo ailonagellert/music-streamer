@@ -48,8 +48,8 @@ const FeatureRequest = () => {
             <div className="bubble-footer">
               {status === 'success' && <span className="status-ok">Thanks! Recorded. 💩</span>}
               {status === 'error' && <span className="status-err">Error! Try again.</span>}
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="btn-submit-feedback"
                 disabled={isSubmitting || !content.trim() || status === 'success'}
               >
@@ -59,7 +59,7 @@ const FeatureRequest = () => {
           </form>
         </div>
       )}
-      <button 
+      <button
         className={`feature-request-fab ${isOpen ? 'fab-active' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
         title="Request a Feature"
