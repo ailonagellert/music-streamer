@@ -25,10 +25,12 @@ To start vibe coding with PoopTunes, you'll need a few essentials:
 ## 🚀 Quick Start (Vibe in 60 Seconds)
 
 1. **Clone the Repo**:
-   ```bash
-   git clone https://github.com/yourusername/pooptunes.git
-   cd pooptunes
-   ```
+   - Open **VS Code**.
+   - Click the **Source Control** icon (or press `Ctrl+Shift+G`).
+   - Click **Clone Repository** and enter: `https://github.com/ailonagellert/music-streamer.git`
+   - Select an empty folder on your computer to save the project.
+   - When prompted, click **Open** to load the workspace.
+   - Open a terminal in VS Code (`Ctrl+` ` ` `) and type: `cd music-streamer`
 2. **Environment Setup**:
    Copy the example environment file to create your own configuration:
    ```bash
